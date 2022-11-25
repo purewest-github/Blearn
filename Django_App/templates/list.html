@@ -1,0 +1,35 @@
+{% extends 'create.html' %}
+{% load static %}
+
+<link href="{% static 'style.css' %}" rel="stylesheet">
+
+
+{% block category %}
+
+{% for item in object_list%}
+{% if forloop.first %}
+
+{% if item.category == 1%}
+<p class="h3 font_test">~Network~</p>
+{% endif %}
+{% if item.category == 2%}
+<p class="h3 font_test">~Web~</p>
+{% endif %}
+{% if item.category == 3%}
+<p class="h3 font_test">~Linux~</p>
+{% endif %}
+{% if item.category == 4%}
+<p class="h3 font_test">~Git~</p>
+{% endif %}
+
+{% endif %}
+{% endfor %}
+{% endblock category %}
+
+{% block main %}
+{% for item in object_list %}
+<div class="alert alert-success" role="alert">
+    <p>タイトル:<a href="{% url 'detail' item.pk %}">{{item.title}}</a></p>
+</div>
+{% endfor %}
+{% endblock main %}
