@@ -1,0 +1,42 @@
+{% extends 'create.html' %}
+
+
+{% block customcss1 %}
+<style>
+    #blur_word {
+        filter:blur(5px);
+    }
+    input {
+        display: none;
+    }
+    input:checked + #blur_word {
+        filter:blur(0px);
+    }
+</style>
+
+{% endblock customcss1 %}
+
+{% block main %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        <p>タイトル:{{object.title}}</p>
+        <p>
+            {{object.new_content | safe}}
+        </p>
+        <p>↓↓↓見たい人は、クリックしてね！↓↓↓</p>
+        <input type="checkbox" id="clickblur">
+        <label id="blur_word" for="clickblur">{{object.content}}</label>
+
+        <div>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{object.pk}}">削除</button>
+        {% include 'delete.html' %}
+        </div>
+
+    </div>
+</div>
+{% else %}
+please login
+{% endif %}
+{{new_content}}
+{% endblock main %}
